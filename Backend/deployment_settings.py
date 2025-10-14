@@ -3,7 +3,8 @@ import dj_database_url
 from .settings import *
 from .settings import BASE_DIR
 
-ALLOWED_HOSTS = [os.environ.get('RENDER_EXTERNAL_HOSTNAME'), 'wearup-backend.onrender.com']
+render_hostname = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+ALLOWED_HOSTS = [host for host in [render_hostname, 'wearup-backend.onrender.com'] if host]
 CSRF_TRUSTED_ORIGINS = ['https://' + os.environ.get('RENDER_EXTERNAL_HOSTNAME')]
 
 DEBUG = False
