@@ -10,14 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
-import os
-from pathlib import Path
+import pymysql
+pymysql.install_as_MySQLdb()
 
-# Optionally support Postgres/other DB via DATABASE_URL
-try:
-    import dj_database_url
-except Exception:
-    dj_database_url = None
+from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,13 +23,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-ht!#xt-&6l#jpx=%!206tjz9mr*n_heencw28z$4u4l)kfj1vw')
+SECRET_KEY = 'django-insecure-ht!#xt-&6l#jpx=%!206tjz9mr*n_heencw28z$4u4l)kfj1vw'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DJANGO_DEBUG', '1') not in ('0', 'False', 'false')
+DEBUG = True
 
-# Allow hosts from environment (comma separated)
-ALLOWED_HOSTS = [h.strip() for h in os.environ.get('DJANGO_ALLOWED_HOSTS', '').split(',') if h.strip()]
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -89,34 +84,18 @@ WSGI_APPLICATION = 'Backend.wsgi.application'
 
 
 # Database
-# Support DATABASE_URL (recommended on Render) or individual DB_* env vars
-DATABASE_URL = os.environ.get('DATABASE_URL')
-if DATABASE_URL and dj_database_url:
-    DATABASES = {
-        'default': dj_database_url.parse(DATABASE_URL, conn_max_age=600)
-    }
-else:
-    DB_ENGINE = os.environ.get('DB_ENGINE', 'django.db.backends.postgresql')
-    # If using PostgreSQL on Render, DB_ENGINE should be 'django.db.backends.postgresql'
-    DATABASES = {
-        'default': {
-            'ENGINE': DB_ENGINE,
-            'NAME': os.environ.get('DB_NAME', 'wearup_new'),
-            'USER': os.environ.get('DB_USER', 'postgres'),
-            'PASSWORD': os.environ.get('DB_PASSWORD', ''),
-            'HOST': os.environ.get('DB_HOST', 'localhost'),
-            'PORT': os.environ.get('DB_PORT', ''),
-        }
-    }
+# https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-# If using pymysql for MySQL, install and use install_as_MySQLdb
-if DATABASES['default']['ENGINE'] == 'django.db.backends.mysql':
-    try:
-        import pymysql
-        pymysql.install_as_MySQLdb()
-    except Exception:
-        # If pymysql is not installed, let the import error surface at startup
-        pass
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'wearup_new',
+        'USER': 'root',
+        'PASSWORD': 'root',
+        'HOST': 'localhost',
+        'PORT': '3306',
+    }
+}
 
 
 # Password validation
