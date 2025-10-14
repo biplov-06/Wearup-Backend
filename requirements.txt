@@ -1,12 +1,12 @@
-djangorestframework
-djangorestframework-simplejwt
-django-cors-headers
 # Requirements for WearUp Backend (deploy to PythonAnywhere)
-# Pinned or recommended versions (adjust if you have constraints)
+# Pinned versions that are compatible with each other. If PythonAnywhere
+# provides newer versions system-wide, prefer installing into a virtualenv.
 Django==5.2.4
-djangorestframework==3.14.0
-djangorestframework-simplejwt==2.9.0
-django-cors-headers==4.0.0
+# Accept DRF 3.15+ which works with latest simplejwt
+djangorestframework>=3.15.0,<3.999
+# Use a modern compatible simplejwt (5.x)
+djangorestframework-simplejwt==5.5.1
+django-cors-headers==4.4.0
 Pillow==10.0.1
 pymysql==1.0.3
 python-dotenv==1.0.0  # optional: helpful for local env var loading
