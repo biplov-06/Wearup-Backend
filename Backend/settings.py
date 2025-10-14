@@ -30,10 +30,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['wearup-backend.onrender.com', '127.0.0.1', 'localhost']
 
-
-# Application definition
-
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -155,3 +151,8 @@ CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 
 CSRF_TRUSTED_ORIGINS = ['https://wearup-backend.onrender.com']
+
+# Import deployment settings if on Render
+import os
+if os.environ.get('DATABASE_URL'):
+    from .deployment_settings import *
