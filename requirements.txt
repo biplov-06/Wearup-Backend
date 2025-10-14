@@ -1,0 +1,22 @@
+## Requirements for WearUp Backend (PythonAnywhere deployment)
+# These pins are chosen to be compatible and to avoid unnecessary native builds
+# - prefer pymysql (pure Python) to avoid compiling mysqlclient on PA
+
+Django==5.2.4
+# DRF 3.15+ is compatible with simplejwt 5.x
+djangorestframework>=3.15.2,<4.0
+djangorestframework-simplejwt==5.5.1
+django-cors-headers==4.4.0
+Pillow==10.0.1
+pymysql==1.0.3
+python-dotenv==1.0.0
+
+# Optional / commented helpers
+# gunicorn==20.1.0         # if you plan to run with gunicorn (not required on PA WSGI)
+# mysqlclient==2.2.7       # native MySQL driver (requires system libraries) - use only if you need it
+# whitenoise==6.5.0        # if you plan to serve static files with whitenoise
+
+# Notes:
+# - On PythonAnywhere it's recommended to install these inside a virtualenv.
+# - If you prefer to use `mysqlclient`, replace pymysql with mysqlclient and ensure
+#   the mysqlclient system libraries are available on the host.
