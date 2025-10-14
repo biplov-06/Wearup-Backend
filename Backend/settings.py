@@ -26,12 +26,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-ht!#xt-&6l#jpx=%!206tjz9mr*n_heencw28z$4u4l)kfj1vw'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['wearup-backend.onrender.com']
+ALLOWED_HOSTS = ['wearup-backend.onrender.com', '127.0.0.1', 'localhost']
 
 
 # Application definition
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
