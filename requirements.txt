@@ -1,0 +1,16 @@
+djangorestframework
+djangorestframework-simplejwt
+django-cors-headers
+# Requirements for WearUp Backend (deploy to PythonAnywhere)
+# Pinned or recommended versions (adjust if you have constraints)
+Django==5.2.4
+djangorestframework==3.14.0
+djangorestframework-simplejwt==2.9.0
+django-cors-headers==4.0.0
+Pillow==10.0.1
+pymysql==1.0.3
+python-dotenv==1.0.0  # optional: helpful for local env var loading
+
+# Optional/runtime helpers you might need on PythonAnywhere:
+# gunicorn==20.1.0  # if you plan to run with gunicorn (not necessary for PAWS default WSGI)
+# mysqlclient==2.1.1  # native MySQL driver alternative to pymysql

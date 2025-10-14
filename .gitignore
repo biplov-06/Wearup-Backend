@@ -1,0 +1,10 @@
+# Backend gitignore
+.env
+venv/
+__pycache__/
+*.pyc
+*.sqlite3
+staticfiles/
+media/
+/.vscode/
+/.idea/
