@@ -11,7 +11,7 @@ else:
     ALLOWED_HOSTS = ['wearup-backend.onrender.com']
     CSRF_TRUSTED_ORIGINS = ['https://wearup-backend.onrender.com']
 
-DEBUG = True
+DEBUG = False
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 
@@ -30,13 +30,13 @@ MIDDLEWARE = [
 
 
 
-# CORS_ALLOWED_ORIGINS = [
-#     "http://localhost:5173"
-# ]
+CORS_ALLOWED_ORIGINS = [
+    "https://wearup-frontend.onrender.com"
+]
 
 STORAGES = {
     "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
+        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
        },
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",

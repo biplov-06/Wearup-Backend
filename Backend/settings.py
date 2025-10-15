@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 import pymysql
 pymysql.install_as_MySQLdb()
 
+import cloudinary_storage
+import cloudinary
+
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -41,6 +44,8 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
+    'cloudinary_storage',
+    'cloudinary',
     'WearUpBack',
 
 ]
@@ -130,10 +135,34 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# Media files (Images) - Cloudinary configuration
+import os
+if os.environ.get('CLOUDINARY_URL') or os.environ.get('CLOUD_NAME'):
+    if os.environ.get('CLOUDINARY_URL'):
+        CLOUDINARY_STORAGE = {
+            'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME'),
+            'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
+            'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET'),
+        }
+        cloudinary.config(**CLOUDINARY_STORAGE)
+        DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+        CLOUDINARY_URL = os.environ.get('CLOUDINARY_URL')
+    else:
+        # Use individual environment variables
+        CLOUDINARY_STORAGE = {
+            'CLOUD_NAME': os.environ.get('CLOUD_NAME'),
+            'API_KEY': os.environ.get('API_KEY'),
+            'API_SECRET': os.environ.get('API_SECRET'),
+        }
+        cloudinary.config(**CLOUDINARY_STORAGE)
+        DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+else:
+    # Fallback to local storage for development
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = BASE_DIR / 'media'
 
 
 # Default primary key field type
