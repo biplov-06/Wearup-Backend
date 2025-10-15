@@ -11,7 +11,7 @@ else:
     ALLOWED_HOSTS = ['wearup-backend.onrender.com']
     CSRF_TRUSTED_ORIGINS = ['https://wearup-backend.onrender.com']
 
-DEBUG = False
+DEBUG = True
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 
